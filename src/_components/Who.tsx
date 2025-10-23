@@ -158,6 +158,7 @@ const Who = () => {
 
   return (
     <section
+      id="who"
       ref={sectionRef}
       className="min-h-screen bg-white py-20 mb-20 flex items-center relative"
     >
@@ -222,17 +223,31 @@ const Who = () => {
 
         {/* İçerik - Carousel */}
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Sol Taraf - Yazı */}
+          {/* Sol Taraf - Görsel */}
+          <div
+            key={`image-${currentSlide}`}
+            className="order-1 lg:order-1 animate-slideUpImage"
+          >
+            <div className="relative border-8 border-black rounded-lg overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <img
+                src={slides[currentSlide].image}
+                alt={slides[currentSlide].title}
+                className="w-full h-[500px] object-cover object-center"
+              />
+            </div>
+          </div>
+
+          {/* Sağ Taraf - Yazı */}
           <div
             key={`content-${currentSlide}`}
-            className="space-y-6 order-2 lg:order-1 animate-slideUpContent"
+            className="space-y-6 order-2 lg:order-2 animate-slideUpContent"
           >
             <div className="space-y-4">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium">
                 {slides[currentSlide].description1}
               </p>
               {slides[currentSlide].description2 && (
-                <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium">
                   {slides[currentSlide].description2}
                 </p>
               )}
@@ -249,33 +264,19 @@ const Who = () => {
                       animation: `slideUpFeature 0.8s ease-out ${index * 0.1}s both`,
                     }}
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#fbca1f] border-3 border-black flex items-center justify-center shrink-0 mt-1">
-                      <span className="font-black text-sm">✓</span>
+                    <div className="w-10 h-10 rounded-full bg-[#fbca1f] border-3 border-black flex items-center justify-center shrink-0 mt-1">
+                      <span className="font-black text-base">✓</span>
                     </div>
                     <div>
-                      <h4 className="font-black text-xl text-gray-900">
+                      <h4 className="font-black text-2xl text-gray-900">
                         {feature.title}
                       </h4>
-                      <p className="text-gray-700">{feature.description}</p>
+                      <p className="text-gray-700 text-lg">{feature.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             )}
-          </div>
-
-          {/* Sağ Taraf - Görsel */}
-          <div
-            key={`image-${currentSlide}`}
-            className="order-1 lg:order-2 animate-slideUpImage"
-          >
-            <div className="relative border-8 border-black rounded-lg overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-              <img
-                src={slides[currentSlide].image}
-                alt={slides[currentSlide].title}
-                className="w-full h-[500px] object-cover object-center"
-              />
-            </div>
           </div>
         </div>
       </div>

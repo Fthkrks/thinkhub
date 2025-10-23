@@ -1,13 +1,21 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 const Header = () => {
   const location = useLocation()
+  const navigate = useNavigate()
 
   const scrollToContact = () => {
     if (location.pathname === '/') {
       const contactSection = document.querySelector('#contact')
       contactSection?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      // Farklı bir sayfadaysan, önce ana sayfaya git
+      navigate('/')
+      setTimeout(() => {
+        const contactSection = document.querySelector('#contact')
+        contactSection?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
     }
   }
 
@@ -26,8 +34,8 @@ const Header = () => {
 
           {/* Ortada Başlık */}
           <div className="hidden lg:flex flex-1 justify-center px-4">
-            <h1 className="text-xl xl:text-3xl cursor-pointer font-semibold text-gray-900 text-center">
-              Bilimsel Araştırma ve Teknoloji Kulubü
+            <h1 className="text-xl xl:text-2xl cursor-pointer font-semibold text-gray-900 text-center">
+             İstanbul Beykent Üniversitesi Bilimsel Araştırma ve Teknoloji Kulubü
             </h1>
           </div>
 

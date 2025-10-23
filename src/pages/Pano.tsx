@@ -3,7 +3,7 @@ import Footer from '../_components/Footer'
 const Pano = () => {
   return (
     <>
-      <section className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-20 flex items-center">
+      <section className="min-h-screen bg-linear-to-br md:mt-0 mt-10 from-gray-50 to-gray-100 py-20 flex items-center">
         <div className="container mx-auto px-4">
           {/* Başlık */}
           <div className="text-center mb-16">

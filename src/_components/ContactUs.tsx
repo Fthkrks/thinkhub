@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HiEnvelope, HiPhone } from "react-icons/hi2";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -7,11 +8,60 @@ const ContactUs = () => {
     email: "",
     mesaj: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form gönderildi:", formData);
-    // Form gönderme işlemleri buraya
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+      const response = await fetch(`${apiUrl}/api/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: "success",
+          message: data.message || "Mesajınız başarıyla gönderildi!",
+        });
+        // Formu temizle
+        setFormData({
+          ad: "",
+          soyad: "",
+          email: "",
+          mesaj: "",
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.message || "Bir hata oluştu. Lütfen tekrar deneyin.",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.",
+      });
+      console.error("Email gönderme hatası:", error);
+    } finally {
+      setIsSubmitting(false);
+      // 5 saniye sonra mesajı kaldır
+      setTimeout(() => {
+        setSubmitStatus({ type: null, message: "" });
+      }, 5000);
+    }
   };
 
   const handleChange = (
@@ -24,7 +74,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-20 flex items-center">
+    <section id="contact" className="min-h-screen bg-linear-to-br from-gray-100 to-gray-200 py-20 flex items-center">
       <div className="container mx-auto px-4">
         {/* Başlık */}
         <div className="text-center mb-16">
@@ -125,13 +175,29 @@ const ContactUs = () => {
               />
             </div>
 
+            {/* Status Mesajı */}
+            {submitStatus.type && (
+              <div
+                className={`mb-6 p-4 border-4 border-black rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-red-100 text-red-800"
+                }`}
+              >
+                <p className="font-bold text-center">{submitStatus.message}</p>
+              </div>
+            )}
+
             {/* Gönder Butonu */}
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-[#fbca1f] hover:bg-[#1ABCAA] px-[2em] py-[0.8em] font-black text-xl border-3 border-black rounded-[0.4em] shadow-[0.2em_0.2em_black] cursor-pointer transition-all duration-150 hover:translate-x-[0.2em] hover:translate-y-[0.2em] hover:shadow-[0.0em_0.0em_black] uppercase"
+                disabled={isSubmitting}
+                className={`bg-[#fbca1f] hover:bg-[#1ABCAA] px-[2em] py-[0.8em] font-black text-xl border-3 border-black rounded-[0.4em] shadow-[0.2em_0.2em_black] cursor-pointer transition-all duration-150 hover:translate-x-[0.2em] hover:translate-y-[0.2em] hover:shadow-[0.0em_0.0em_black] uppercase ${
+                  isSubmitting ? "opacity-60 cursor-not-allowed" : ""
+                }`}
               >
-                Gönder
+                {isSubmitting ? "Gönderiliyor..." : "Gönder"}
               </button>
             </div>
           </form>
@@ -141,7 +207,9 @@ const ContactUs = () => {
         <div className="max-w-3xl mx-auto mt-12 flex justify-center gap-8">
           {/* Email */}
           <div className="border-4 border-black rounded-lg bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-            <div className="text-3xl mb-2">📧</div>
+            <div className="flex justify-center mb-2">
+              <HiEnvelope className="text-4xl text-gray-900" />
+            </div>
             <h3 className="font-black text-gray-900 mb-2 uppercase">Email</h3>
             <p className="text-gray-700 text-sm font-semibold break-all">
               info@thinkhub.com
@@ -150,10 +218,12 @@ const ContactUs = () => {
 
           {/* Telefon */}
           <div className="border-4 border-black rounded-lg bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-            <div className="text-3xl mb-2">📱</div>
+            <div className="flex justify-center mb-2">
+              <HiPhone className="text-4xl text-gray-900" />
+            </div>
             <h3 className="font-black text-gray-900 mb-2 uppercase">Telefon</h3>
             <p className="text-gray-700 text-sm font-semibold">
-              +90 555 123 4567
+              +90 530 513 9894
             </p>
           </div>
 

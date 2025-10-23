@@ -55,7 +55,7 @@ const Hero = () => {
   }, [currentSlide]);
 
   return (
-    <section className="relative bg-linear-to-br from-gray-50  to-gray-100 min-h-screen py-20 overflow-hidden flex items-center">
+    <section id="hero" className="relative bg-linear-to-br from-gray-100 md:mt-0 mt-10 to-gray-200 min-h-screen py-20 overflow-hidden flex items-center">
       <div className="container mx-auto px-4 mb-20">
         <div className="relative">
           {/* Main Content */}

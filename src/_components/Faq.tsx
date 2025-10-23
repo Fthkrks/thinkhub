@@ -41,7 +41,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#F6F7F8] py-20 flex items-center">
+    <section id="faq" className="min-h-screen bg-gray-200 py-20 flex items-center">
       <div className="container mx-auto px-4">
         {/* Başlık */}
         <div className="text-center mb-16">
@@ -60,23 +60,23 @@ const Faq = () => {
             {faqs.slice(0, 3).map((faq, index) => (
               <div
                 key={index}
-                className="relative border-4 border-black rounded-lg overflow-hidden bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px]"
+                className="border-4  border-black rounded-lg overflow-hidden bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px]"
               >
-                {/* GÜNCEL Badge */}
-                {faq.guncel && (
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="bg-[#fbca1f] text-black font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase">
-                      GÜNCEL
-                    </span>
-                  </div>
-                )}
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left bg-white hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-5 flex items-center  hover:cursor-pointer justify-between text-left bg-white hover:bg-gray-50 transition-colors"
                 >
-                  <h3 className={`text-lg md:text-xl font-black text-gray-900 uppercase pr-4 ${faq.guncel ? 'pl-20' : ''}`}>
-                    {faq.question}
-                  </h3>
+                  <div className="flex items-center gap-3 pr-4">
+                    {/* GÜNCEL Badge */}
+                    {faq.guncel && (
+                      <span className="bg-[#fbca1f] text-black font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase shrink-0">
+                        GÜNCEL
+                      </span>
+                    )}
+                    <h3 className="text-lg md:text-xl font-black text-gray-900 uppercase">
+                      {faq.question}
+                    </h3>
+                  </div>
                   <svg
                     className={`w-6 h-6 shrink-0 transition-transform duration-300 ${
                       openIndex === index ? "rotate-180" : ""
@@ -113,23 +113,23 @@ const Faq = () => {
             {faqs.slice(3, 5).map((faq, index) => (
               <div
                 key={index + 3}
-                className="relative border-4 border-black rounded-lg overflow-hidden bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px]"
+                className="border-4  border-black rounded-lg overflow-hidden bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px]"
               >
-                {/* GÜNCEL Badge */}
-                {faq.guncel && (
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="bg-[#fbca1f] text-black font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase">
-                      GÜNCEL
-                    </span>
-                  </div>
-                )}
                 <button
                   onClick={() => toggleFaq(index + 3)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left bg-white hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-5 flex items-center  hover:cursor-pointer justify-between text-left bg-white hover:bg-gray-50 transition-colors"
                 >
-                  <h3 className={`text-lg md:text-xl font-black text-gray-900 uppercase pr-4 ${faq.guncel ? 'pl-20' : ''}`}>
-                    {faq.question}
-                  </h3>
+                  <div className="flex items-center gap-3 pr-4">
+                    {/* GÜNCEL Badge */}
+                    {faq.guncel && (
+                      <span className="bg-[#fbca1f] text-black font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase shrink-0">
+                        GÜNCEL
+                      </span>
+                    )}
+                    <h3 className="text-lg md:text-xl font-black text-gray-900 uppercase">
+                      {faq.question}
+                    </h3>
+                  </div>
                   <svg
                     className={`w-6 h-6 shrink-0 transition-transform duration-300 ${
                       openIndex === index + 3 ? "rotate-180" : ""
