@@ -89,19 +89,34 @@ npm run dev
 3. Formu doldurun ve gönderin
 4. `RECEIVER_EMAIL` adresinize email gelip gelmediğini kontrol edin
 
-## ⚙️ İki Terminal Gerekli
+## ⚙️ Çalıştırma Seçenekleri
 
-Projeyi tam çalıştırmak için 2 terminal penceresi açmalısınız:
+### Seçenek 1: Tek Komutla Her İkisi (⚡ Önerilen)
+
+```bash
+npm run dev:all
+```
+
+Bu komut hem frontend hem backend'i aynı anda başlatır. Renkli output ile hangi log'un nereden geldiğini kolayca görebilirsiniz:
+- 🔵 FRONTEND (cyan) - Frontend logları
+- 🔴 BACKEND (magenta) - Backend logları
+
+### Seçenek 2: Ayrı Terminaller
+
+Projeyi ayrı terminallerde çalıştırmak isterseniz:
 
 **Terminal 1 - Frontend:**
 ```bash
 npm run dev
+# veya
+npm run dev:frontend
 ```
 
 **Terminal 2 - Backend:**
 ```bash
-cd server
-npm run dev
+npm run dev:backend
+# veya
+cd server && npm run dev
 ```
 
 ## 🔧 Sorun Giderme

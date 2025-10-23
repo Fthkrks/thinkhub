@@ -19,35 +19,51 @@ Modern ve dinamik bir web sitesi. React, TypeScript, Tailwind CSS ve Vite ile ge
 
 ## 🛠️ Kurulum
 
-### 1. Frontend Kurulumu
+### 1. Ana Kurulum
 
 ```bash
-# Bağımlılıkları yükleyin
+# Ana dizinde bağımlılıkları yükleyin
 npm install
 
-# Development server'ı başlatın
-npm run dev
+# Server klasöründe bağımlılıkları yükleyin
+cd server
+npm install
+cd ..
 ```
 
-Frontend varsayılan olarak `http://localhost:5173` adresinde çalışacaktır.
-
-### 2. Backend Kurulumu (Email Servisi)
+### 2. Backend Environment Variables
 
 ```bash
-# Server klasörüne gidin
+# Server klasöründe .env dosyası oluşturun
 cd server
-
-# Bağımlılıkları yükleyin
-npm install
-
-# Environment variables ayarlayın
 cp env.example .env
 # .env dosyasını düzenleyin ve email bilgilerinizi girin
-
-# Server'ı başlatın
-npm run dev
+cd ..
 ```
 
+### 3. Çalıştırma
+
+#### ⚡ Tek Komutla Her İkisini Birden (Önerilen):
+```bash
+npm run dev:all
+```
+
+#### Veya Ayrı Ayrı:
+
+**Frontend:**
+```bash
+npm run dev:frontend
+# veya
+npm run dev
+```
+Frontend varsayılan olarak `http://localhost:5173` adresinde çalışacaktır.
+
+**Backend:**
+```bash
+npm run dev:backend
+# veya
+cd server && npm run dev
+```
 Backend varsayılan olarak `http://localhost:3001` adresinde çalışacaktır.
 
 Detaylı backend kurulum talimatları için [server/README.md](server/README.md) dosyasına bakın.
