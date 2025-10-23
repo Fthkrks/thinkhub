@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "cd .. && npm install && npm run build"
+    "build": "echo 'No build step required for Node.js server'"
   },
   "keywords": ["nodemailer", "express", "email"],
   "author": "",

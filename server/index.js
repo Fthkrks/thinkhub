@@ -19,19 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the dist directory (built frontend)
-const distPath = path.join(__dirname, '../../dist');
-console.log('📁 Looking for dist folder at:', distPath);
-
-// Check if dist folder exists
-import fs from 'fs';
-if (!fs.existsSync(distPath)) {
-  console.error('❌ Dist folder not found! Make sure frontend is built first.');
-  console.error('Expected path:', distPath);
-} else {
-  console.log('✅ Dist folder found, serving static files');
-}
-
-app.use(express.static(distPath));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // API Routes
 
@@ -178,12 +166,7 @@ app.get('/api/health', (req, res) => {
 
 // Catch-all handler: send back React's index.html file for any non-API routes
 app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, '../../dist/index.html');
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
-  } else {
-    res.status(404).send('Frontend not built. Please run npm run build first.');
-  }
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
